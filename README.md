@@ -1,36 +1,156 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Task Management System – Frontend (Next.js)
 
-First, run the development server:
+
+This is the **frontend web application** for the Task Management System.
+
+
+It is built using:
+
+
+- **Next.js (App Router)**
+- **TypeScript**
+- **Axios**
+- **Tailwind CSS**
+- **JWT Authentication (Access + Refresh Token)**
+
+
+---
+
+
+## 🚀 Features Implemented
+
+
+### ✅ Authentication
+
+
+- User Registration
+- User Login
+- Secure token storage (Access Token + Refresh Token)
+- Auto-refresh access token when expired
+- Logout functionality
+
+
+### ✅ Task Dashboard
+
+
+- View all personal tasks
+- Add new tasks
+- Edit tasks
+- Delete tasks
+- Toggle task status (Completed/Pending)
+
+
+### ✅ Advanced Task List Features
+
+
+- Pagination (Load More)
+- Search tasks by title
+- Filter tasks by status
+
+
+### ✅ UI Enhancements
+
+
+- Responsive design (Mobile + Desktop)
+- Toast notifications for actions
+
+
+---
+
+
+## 📂 Folder Structure
+
+
+<pre>
+task-manager-frontend/
+│
+├── app/
+│ ├── login/ # Login Page
+│ ├── register/ # Register Page
+│ ├── dashboard/ # Task Dashboard
+│ ├── layout.tsx # Root Layout + Toast Setup
+│ └── page.tsx # Redirect to Login
+│
+├── src/
+│ ├── services/
+│ │ ├── api.ts # Axios instance + Refresh logic
+│ │ ├── auth.ts # Auth API calls
+│ │ └── tasks.ts # Task CRUD API calls
+│ │
+│ ├── components/
+│ │ ├── TaskForm.tsx # Add/Edit Task Form
+│ │ └── TaskItem.tsx # Task Card UI
+│ │
+│ └── utils/
+│ └── token.ts # Token helper functions
+│
+└── package.json
+</pre>
+
+
+---
+
+
+## ⚙️ Setup Instructions
+
+
+### 1️⃣ Clone the Repository
+
 
 ```bash
+git clone <your-repo-url>
+cd task-manager-frontend
+2️⃣ Install Dependencies
+npm install
+3️⃣ Configure Backend API URL
+
+Ensure your backend is running at:
+
+http://localhost:5000
+
+Frontend Axios Base URL is set in:
+
+📌 src/services/api.ts
+
+baseURL: "http://localhost:5000";
+4️⃣ Run the Frontend Application
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Application will start at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
+🔑 Authentication Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+User logs in using /login
 
-## Learn More
+Backend returns:
 
-To learn more about Next.js, take a look at the following resources:
+Access Token (short-lived)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Refresh Token (long-lived)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tokens are stored in localStorage
 
-## Deploy on Vercel
+Axios automatically refreshes the access token when expired
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+📌 API Endpoints Used
+Auth APIs
+Endpoint	Method	Description
+/auth/register	POST	Register user
+/auth/login	POST	Login user
+/auth/refresh	POST	Refresh access token
+/auth/logout	POST	Logout user
+Task APIs (Protected)
+Endpoint	Method	Description
+/tasks	GET	Fetch tasks (pagination + search + filter)
+/tasks	POST	Create task
+/tasks/:id	PATCH	Update task
+/tasks/:id	DELETE	Delete task
+/tasks/:id/toggle	PATCH	Toggle status
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+👨‍💻 Author
+
+Ayush Pandey
+Full Stack Developer
